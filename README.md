@@ -71,6 +71,7 @@ data/
 
 models/
 - yolov8n.pt
+Download YOLOv8 model from Ultralytics and place it inside the models/ folder.
 
 outputs/
 - output.mp4
@@ -145,6 +146,7 @@ Surveillance systems
 - Trajectory heatmap visualization
 
 ---
+
 
 ## Author
 

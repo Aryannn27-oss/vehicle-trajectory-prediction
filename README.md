@@ -1,94 +1,56 @@
-Vision-Based Vehicle Trajectory Prediction 🚗📈
-Built a vehicle detection + tracking + prediction system using YOLOv8 + DeepSORT. Tracks cars in videos, smooths their paths, and predicts where they'll go next using Kalman Filters (working now) and LSTM (still training).
+🚗📈 Vision-Based Vehicle Trajectory Prediction
+<small>Built vehicle detection + tracking + prediction using YOLOv8 + DeepSORT. Tracks cars, smooths paths, predicts motion with Kalman (working) + LSTM (WIP).</small>
 
-Quick note: LSTM part is WIP – not trained properly yet. Kalman is doing the heavy lifting for now.
+⚠️ LSTM under training – Kalman is main prediction now.
 
-What it does
-Detects vehicles with YOLOv8
+What It Does
+<small>1. YOLOv8 detects vehicles
+2. DeepSORT tracks across frames
+3. Extracts + smooths trajectories
+4. Kalman/LSTM motion prediction</small>
 
-Tracks them across frames with DeepSORT
-
-Extracts trajectories from track positions
-
-Smooths paths with spline interpolation
-
-Predicts motion – Kalman (main) + LSTM (experimental)
-
-Output video shows:
-
-Yellow bounding boxes around cars
-
-Blue curved lines = actual trajectory
-
-Red dot = Kalman prediction
-
-Green dot = LSTM prediction
-
-Saved as outputs/output.mp4
+Output shows: Yellow boxes, blue paths, red/green prediction dots → outputs/output.mp4
 
 Pipeline
 text
-Video → YOLO Detection → DeepSORT Tracking → 
-Trajectory → Smoothing → Kalman/LSTM Prediction → 
-Output Video
+<small>Video → YOLO → DeepSORT → Trajectory → 
+Smoothing → Kalman/LSTM → Output Video</small>
 Project Structure
 text
+<small>
 vision_trajectory_prediction/
-├── data/video.mp4              # your input video
-├── models/yolov8n.pt           # download from ultralytics
-├── outputs/output.mp4          # processed video
-├── src/
-│   ├── tracker.py
-│   ├── kalman_predictor.py
-│   └── trajectory_lstm.py
+├── data/video.mp4
+├── models/yolov8n.pt
+├── outputs/output.mp4
+├── src/tracker.py
+├── src/kalman_predictor.py
+├── src/trajectory_lstm.py
 ├── main.py
 └── requirements.txt
+</small>
 Setup & Run
 bash
-git clone https://github.com/Aryannn27-oss/vision-trajectory-prediction.git
-cd vision-trajectory-prediction
+<small>git clone https://github.com/Aryannn27-oss/vision-trajectory-prediction.git<br>
+cd vision_trajectory-prediction<br>
+pip install -r requirements.txt</small>
+<small>Download yolov8n.pt → models/
+Drop video in data/ → python main.py</small>
 
-# Download YOLOv8 model
-# wget https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt -P models/
-
-pip install -r requirements.txt
-Drop your video in data/ and run:
-
-bash
-python main.py
 Tech Stack
-Python, OpenCV, PyTorch
+<small>Python - OpenCV - PyTorch - YOLOv8 - DeepSORT - Kalman - LSTM - NumPy - SciPy</small>
 
-YOLOv8 (Ultralytics)
+Output Demo
+Applications
+<small>Traffic analysis - Autonomous driving - Surveillance - Smart cities</small>
 
-DeepSORT tracking
+TODO
+<small>- Train LSTM properly
+- Vehicle speed estimation
+- Real-time processing
+- Traffic flow analysis
+- Heatmaps</small>
 
-Kalman Filter + LSTM
-
-NumPy, SciPy
-
-What you see in output
-Real-world uses
-Traffic analysis
-
-Self-driving car research
-
-Surveillance
-
-Smart city stuff
-
-Next steps (TODO)
-Train LSTM properly on trajectory datasets
-
-Add vehicle speed estimation
-
-Real-time processing
-
-Traffic flow analysis
-
-Heatmaps
-
-About me
-Aryan Verma
+About
+<small>Aryan Verma
 B.Tech Chemical Engineering
 IIT (BHU) Varanasi

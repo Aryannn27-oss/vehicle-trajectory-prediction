@@ -1,155 +1,94 @@
-# Vision-Based Vehicle Trajectory Prediction 🚗📈
+Vision-Based Vehicle Trajectory Prediction 🚗📈
+Built a vehicle detection + tracking + prediction system using YOLOv8 + DeepSORT. Tracks cars in videos, smooths their paths, and predicts where they'll go next using Kalman Filters (working now) and LSTM (still training).
 
-This project implements a **vision-based multi-object tracking and trajectory prediction system** using modern computer vision techniques.
+Quick note: LSTM part is WIP – not trained properly yet. Kalman is doing the heavy lifting for now.
 
-The system detects vehicles in a video, tracks them across frames, and predicts their motion using **Kalman Filters and an experimental LSTM-based trajectory predictor**.
+What it does
+Detects vehicles with YOLOv8
 
-⚠️ **Note:** The LSTM-based prediction module is currently **under development and not fully trained yet**. At the moment, Kalman-based motion prediction is the primary prediction mechanism.
+Tracks them across frames with DeepSORT
 
+Extracts trajectories from track positions
 
-## Project Overview
+Smooths paths with spline interpolation
 
-The system processes a video and performs the following tasks:
+Predicts motion – Kalman (main) + LSTM (experimental)
 
-1. **Vehicle Detection** using YOLOv8
-2. **Multi-object Tracking** using DeepSORT
-3. **Trajectory Extraction** from tracked vehicle positions
-4. **Trajectory Smoothing** using spline interpolation
-5. **Motion Prediction**
-   - Kalman Filter (physics-based prediction)
-   - LSTM Neural Network (learning-based prediction – under development)
+Output video shows:
 
-The output video visualizes:
+Yellow bounding boxes around cars
 
-- vehicle bounding boxes
-- trajectory paths
-- predicted motion positions
+Blue curved lines = actual trajectory
 
----
+Red dot = Kalman prediction
 
-## System Pipeline
+Green dot = LSTM prediction
 
-Video Input  
-↓  
-YOLOv8 Vehicle Detection  
-↓  
-DeepSORT Multi-object Tracking  
-↓  
-Trajectory Extraction  
-↓  
-Trajectory Smoothing  
-↓  
-Kalman Motion Prediction  
-↓  
-Experimental LSTM Motion Prediction  
-↓  
-Visualization Output  
+Saved as outputs/output.mp4
 
----
-
-## Example Output
-
-The output visualization includes:
-
-- **Bounding Boxes** → detected vehicles  
-- **Blue Curved Lines** → trajectory history  
-- **Red Dot** → Kalman predicted position  
-- **Green Dot** → LSTM predicted position (experimental)
-
-The processed video is saved in:
-
-outputs/output.mp4
-
----
-
-## Project Structure
-
+Pipeline
+text
+Video → YOLO Detection → DeepSORT Tracking → 
+Trajectory → Smoothing → Kalman/LSTM Prediction → 
+Output Video
+Project Structure
+text
 vision_trajectory_prediction/
+├── data/video.mp4              # your input video
+├── models/yolov8n.pt           # download from ultralytics
+├── outputs/output.mp4          # processed video
+├── src/
+│   ├── tracker.py
+│   ├── kalman_predictor.py
+│   └── trajectory_lstm.py
+├── main.py
+└── requirements.txt
+Setup & Run
+bash
+git clone https://github.com/Aryannn27-oss/vision-trajectory-prediction.git
+cd vision-trajectory-prediction
 
-data/
-- video.mp4
-
-models/
-- yolov8n.pt
-Download YOLOv8 model from Ultralytics and place it inside the models/ folder.
-
-outputs/
-- output.mp4
-![Demo](outputs/demo.gif)
-
-src/
-- tracker.py
-- kalman_predictor.py
-- trajectory_lstm.py
-
-main.py  
-requirements.txt  
-README.md  
-
----
-
-## Installation
-
-Clone the repository:
-
-git clone https://github.com/Aryannn27-oss/vision-trajectory-prediction.git  
-cd vision-trajectory-prediction  
-
-Install dependencies:
+# Download YOLOv8 model
+# wget https://github.com/ultralytics/assets/releases/download/v0.0.0/yolov8n.pt -P models/
 
 pip install -r requirements.txt
+Drop your video in data/ and run:
 
----
-
-## Running the Project
-
-Place a video inside the **data/** folder and run:
-
+bash
 python main.py
+Tech Stack
+Python, OpenCV, PyTorch
 
-The processed output video will be saved to:
+YOLOv8 (Ultralytics)
 
-outputs/output.mp4
+DeepSORT tracking
 
----
+Kalman Filter + LSTM
 
-## Technologies Used
+NumPy, SciPy
 
-Python  
-OpenCV  
-PyTorch  
-YOLOv8 (Ultralytics)  
-DeepSORT Tracking  
-Kalman Filter  
-LSTM Neural Networks  
-NumPy  
-SciPy  
+What you see in output
+Real-world uses
+Traffic analysis
 
----
+Self-driving car research
 
-## Applications
+Surveillance
 
-Traffic monitoring  
-Autonomous driving research  
-Smart city analytics  
-Vehicle behavior analysis  
-Surveillance systems  
+Smart city stuff
 
----
+Next steps (TODO)
+Train LSTM properly on trajectory datasets
 
-## Future Improvements
+Add vehicle speed estimation
 
-- Training the LSTM model on real trajectory datasets
-- Vehicle speed estimation from trajectories
-- Trajectory clustering and traffic flow analysis
-- Real-time video processing
-- Trajectory heatmap visualization
+Real-time processing
 
----
+Traffic flow analysis
 
+Heatmaps
 
-## Author
-
-Aryan Verma  
-B.Tech Chemical Engineering  
+About me
+Aryan Verma
+B.Tech Chemical Engineering
 IIT (BHU) Varanasi

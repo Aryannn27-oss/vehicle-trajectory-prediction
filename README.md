@@ -91,7 +91,7 @@ README.md
 
 Clone the repository:
 
-git clone https://github.com/yourusername/vision-trajectory-prediction.git  
+git clone https://github.com/Aryannn27-oss/vision-trajectory-prediction.git  
 cd vision-trajectory-prediction  
 
 Install dependencies:
